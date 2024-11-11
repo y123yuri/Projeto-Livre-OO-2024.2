@@ -6,7 +6,7 @@ from arquivo_main import *
 
 class Metodo_busca():
 
-    def metodo(self,codigo):
+    def metodo_turma(self,codigo):
         procedural_turmas = Salvar_turmas()
         procedural_turmas.tratar_turmas()
         buscar = Buscar_turma(procedural_turmas)   
@@ -16,11 +16,54 @@ class Metodo_busca():
         lista_turmas = []
         contador_turmas = 0
         for turma in turmas_encontradas:
-            contador_turmas =+ 1
+            contador_turmas += 1
             professor = turma.professor
             horario = turma.horario
             local  = turma.local
             semestre = '2024.2'
+            print(contador_turmas)
             print(f'Há a turma do(a) professor(a) {professor}, seu horário é {horario}, seu local é {local}, e seu semestre é {semestre}------------------{contador_turmas}')
             lista_turmas.append([turma, contador_turmas])
-        return turmas_encontradas
+        return lista_turmas
+
+
+class Metodo_busca_materia():
+    
+    def metodo_materia_codigo(self,codigo):
+            procedural_materias = Salvar_materias()
+            procedural_materias.tratar_materia()
+            buscar = Buscar_materia(procedural_materias)
+
+            lista_materias = []
+            contador_materias = 0
+            materia_buscada = buscar.buscar_por_codigo(codigo)
+
+            if materia_buscada:
+                for materia in materia_buscada:
+                    contador_materias =+ 1
+                    print(f'Encontramos a matéria {materia.nome} e o seu código é {materia.codigo}')
+                    lista_materias.append([materia,contador_materias])
+                    
+                return lista_materias
+               
+            else:
+                print("Nenhuma matéria encontrada com esse código.")
+
+
+
+    def metodo_materia_nome(self,nome):
+        procedural_materias = Salvar_materias()
+        procedural_materias.tratar_materia()
+        buscar = Buscar_materia(procedural_materias)
+        contador_nome = 0
+        lista_materia = []
+
+        for materia in materia_buscada:
+            contador_nome += 1
+            materia = [materia,contador_nome]
+            lista_materia.append(materia)
+            print(f'Encontramos a matéria {materia[0].nome} e o seu código é {materia[0].codigo} -------------------- {materia[1]}')
+            
+            if contador_nome == 10:
+                return lista_materia
+                break

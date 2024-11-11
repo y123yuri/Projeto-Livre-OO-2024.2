@@ -8,7 +8,9 @@ procedural_materias = Salvar_materias()
 procedural_materias.tratar_materia()
 buscar = Buscar_materia(procedural_materias)
 
-buscar_turma_classe = Metodo_busca()
+buscar_metodos = Metodo_busca()
+buscar_metodos_materia = Metodo_busca_materia()
+
 
 
 
@@ -47,14 +49,8 @@ class Main():
                         print('Você desistiu da pesquisa!')
                         break
                     else:
-                        materia_buscada = buscar.buscar_por_codigo(codigo=codigo_pesquisado)
-                        if materia_buscada:
-                            print("Matéria(s) encontrada(s):")
-                            for materia in materia_buscada:
-                                print(f'Encontramos a matéria {materia.nome} e o seu código é {materia.codigo}')
-                            ###fazer logica aqui, para abrir turmas
-                        else:
-                            print("Nenhuma matéria encontrada com esse código.")
+                        buscar_metodos_materia.metodo_materia_codigo(codigo_pesquisado)
+
             elif metodo == '2':
                 print('Agora iremos pesquisar a sua matéria por nome até encontrar.')
                 print('Digite "$" para parar de pesquisar')
@@ -92,7 +88,7 @@ class Main():
                                                 if numero[1] == escolha_materia:
                                                     print(f'A matéria que você escolheu foi {numero[0].nome}')
                                                     print('Agora vamos escolher qual a turma que você deseja.')
-                                                    buscar_turma_classe.metodo(numero[0].codigo)
+                                                    buscar_metodos.metodo_turma(numero[0].codigo)
                                                 else:
                                                     pass
                                         

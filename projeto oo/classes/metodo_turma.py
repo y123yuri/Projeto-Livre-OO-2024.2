@@ -58,12 +58,22 @@ class Metodo_busca_materia():
         contador_nome = 0
         lista_materia = []
 
-        for materia in materia_buscada:
-            contador_nome += 1
-            materia = [materia,contador_nome]
-            lista_materia.append(materia)
-            print(f'Encontramos a matéria {materia[0].nome} e o seu código é {materia[0].codigo} -------------------- {materia[1]}')
-            
-            if contador_nome == 10:
-                return lista_materia
-                break
+        materia_buscada = buscar.buscar_por_nome(nome=nome)
+        if materia_buscada:
+
+            for materia in materia_buscada:
+                contador_nome += 1
+                materia = [materia,contador_nome]
+                lista_materia.append(materia)
+                print(f'Encontramos a matéria {materia[0].nome} e o seu código é {materia[0].codigo} -------------------- {materia[1]}')
+                
+                if contador_nome == 10:
+                    return lista_materia
+                    
+                    
+        
+        else:
+            print("Nenhuma matéria encontrada com esse nome.")
+            return lista_materia
+
+        

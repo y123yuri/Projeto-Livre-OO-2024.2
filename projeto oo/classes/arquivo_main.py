@@ -49,12 +49,13 @@ class Main():
                         print('Você desistiu da pesquisa!')
                         break
                     else:
-                        buscar_metodos_materia.metodo_materia_codigo(codigo_pesquisado)
+                        materia = buscar_metodos_materia.metodo_materia_codigo(codigo_pesquisado)
+                        
                         verificacao_codigo = input('A matéria que você procura está correta?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ').upper()
                         if verificacao_codigo == 'S':
-                            print(f'A matéria que você escolheu foi {numero[0].nome}')
+                            print(f'A matéria que você escolheu foi {materia[0].nome}')
                             print('Agora vamos escolher qual a turma que você deseja.')
-                            buscar_metodos.metodo_turma(numero[0].codigo)             
+                            buscar_metodos.metodo_turma(materia[0].codigo)             
                         else: 
                             print('Pesquise novamente.')
                             break
@@ -70,7 +71,8 @@ class Main():
                     else:
                             lista_materia = buscar_metodos_materia.metodo_materia_nome(nome_pesquisado)
                             
-                            if not lista_materia :
+                            
+                            if not lista_materia : # 
                                 pass
 
                             else:
@@ -104,7 +106,6 @@ class Main():
                       
             
 
-            else:
                 print('---------------------Método inválido, tente novamente!---------------------')
 
         

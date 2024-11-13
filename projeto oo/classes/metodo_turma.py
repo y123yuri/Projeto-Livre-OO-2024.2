@@ -33,21 +33,15 @@ class Metodo_busca_materia():
             procedural_materias = Salvar_materias()
             procedural_materias.tratar_materia()
             buscar = Buscar_materia(procedural_materias)
+            materia = buscar.buscar_por_codigo(codigo)
+            if materia:
 
-            lista_materias = []
-            contador_materias = 0
-            materia_buscada = buscar.buscar_por_codigo(codigo)
-
-            if materia_buscada:
-                for materia in materia_buscada:
-                    contador_materias =+ 1
-                    print(f'Encontramos a matéria {materia.nome} e o seu código é {materia.codigo}')
-                    lista_materias.append([materia,contador_materias])
-                    
-                return lista_materias
-               
+                print(f'Encontramos a matéria {materia[0].nome} e o seu código é {materia[0].codigo}')
+                return materia
+                   
             else:
                 print("Nenhuma matéria encontrada com esse código.")
+                
 
 
 
@@ -69,6 +63,7 @@ class Metodo_busca_materia():
                 
                 if contador_nome == 10:
                     return lista_materia
+            return lista_materia
                     
                     
         

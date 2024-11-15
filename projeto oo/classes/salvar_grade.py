@@ -60,17 +60,18 @@ class Grade():
 
     
 
-horario = "35T23"
+horario = "246M12"
 lista_horario = []
 mudar_para_horario = False
 letra_turno = ""
 for letra in horario:
     try:
         letra = int(letra)
-        print(letra, "entrei no try")
+        
         if mudar_para_horario == True:
+
             lista_horarios_feitos = [["M1", "08:00 - 09:00"], ["M2", "09:00 - 09:50"], ["M3", "10:00 - 11:00"], ["M4", "11:00 - 11:50"], ["M5", "12:00 - 13:00"], ["T1", "13:00 - 13:50"], ["T2", "14:00 - 15:00"], ["T3", "15:00 - 15:50"], ["T4", "16:00 - 17:00"], ["T5", "17:00 - 17:50"], ["N1", "19:00 - 19:50"], ["N2", "19:50 - 20:40"], ["N3", "20:50 - 21:40"], ["N4", "21:40 - 22:30"]]
-            numero_mais_turno = (f"{letra_turno}+{letra}")
+            numero_mais_turno = (f"{letra_turno}{letra}")
             for horario in lista_horarios_feitos:
                 if horario[0] == numero_mais_turno:
                     lista_horario.append(horario)
@@ -82,15 +83,12 @@ for letra in horario:
                 if letra == dia[0]:
                     lista_horario.append(dia[1])
                 else:
-                    #print("não sou eu")
                     pass
     except:
-        print("entrei no except")
         lista_turno = [["M", "Matutino"], ["T", "Vespertino"], ["N", "Noturno"]]
         for turno in lista_turno:
-            if letra == turno[0]:
-                print(turno[0])
-                lista_horario.append[turno[0]]
+            if letra == turno[0]:    
+                lista_horario.append(turno[0])
                 letra_turno = letra
                 mudar_para_horario = True
             else:

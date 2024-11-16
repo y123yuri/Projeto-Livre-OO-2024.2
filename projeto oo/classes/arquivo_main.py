@@ -8,9 +8,8 @@ procedural_materias = Salvar_materias()
 procedural_materias.tratar_materia()
 buscar = Buscar_materia(procedural_materias)
 
-buscar_metodos = Metodo_busca()
 buscar_metodos_materia = Metodo_busca_materia()
-
+buscar_metodos = Metodo_busca()
 
 
 
@@ -55,7 +54,18 @@ class Main():
                         if verificacao_codigo == 'S':
                             print(f'A matéria que você escolheu foi {materia[0].nome}')
                             print('Agora vamos escolher qual a turma que você deseja.')
-                            buscar_metodos.metodo_turma(materia[0].codigo)             
+                            buscar_metodos.metodo_turma(materia[0].codigo)
+                            verificacao_turma = input('A turma que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ').upper() 
+                            if verificacao_turma == 'N':
+                                break   
+                            else:
+                                while True:
+                                    escolha_turma = input('Digite o número de sua turma: ')
+                                    try:
+                                        escolha_turma = int(escolha_materia)
+                                    except:
+                                            pass
+
                         else: 
                             print('Pesquise novamente.')
                             break

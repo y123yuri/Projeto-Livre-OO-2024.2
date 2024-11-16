@@ -99,17 +99,27 @@ class Grade():
 
     def printar_na_main_turma(self,nome_materia, professor, hora, dias, local, horario_unb):
         # Formatação dos dias
+        
+        ordem_dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
+
+        # Código para formatar os dias
         if len(dias) == 1:
             dias_formatados = dias[0]
         elif len(dias) == 2:
+            # Ordenar os dias conforme a ordem definida
+            dias.sort(key=lambda dia: ordem_dias.index(dia))
             dias_formatados = f"{dias[0]} e {dias[1]}"
         else:
+            # Ordenar os dias conforme a ordem definida
+            dias.sort(key=lambda dia: ordem_dias.index(dia))
             dias_formatados = ", ".join(dias[:-1]) + f" e {dias[-1]}"
+        horarios_formatados = ', '.join(hora)
         
+
         print(
             f"A turma da matéria {nome_materia} que você escolheu é do(a) professor(a) {professor}, "
             f"tem o horário {horario_unb},\nque se aplica no(s) dia(s) {dias_formatados}, "
-            f"no horário(s) {hora} e no(s) lugares {local}."
+            f"no horário(s) {horarios_formatados} e na(s) salas {local}."
         )
 
     

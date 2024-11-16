@@ -1,6 +1,6 @@
 import sys
 import os
-
+1
 # 2
 #  a pasta "classes" ao caminho de busca de módulos
 diretorio_classes = os.path.join(os.path.dirname(__file__), 'projeto oo\classes')

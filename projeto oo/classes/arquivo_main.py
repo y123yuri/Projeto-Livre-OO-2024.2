@@ -67,7 +67,7 @@ class Main():
                                         try:
                                             escolha_turma = int(escolha_turma)
                                         except:
-                                            if escolha_materia == '$':
+                                            if escolha_turma == '$':
                                                 break
                                             pass
                                         if type(escolha_turma) == int and  len(lista_turmas) >= escolha_turma:

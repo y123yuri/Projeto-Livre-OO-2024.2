@@ -36,7 +36,7 @@ class Grade():
                     else:
                         pass
 
-        resultado = [dias, horarios, [letra_turno]]
+        resultado = [dias, horarios]
         print(resultado)
         return resultado
                         
@@ -64,7 +64,7 @@ class Grade():
 
             for idx, horario in enumerate(horarios):
                 turno_atual = ""
-                if idx < 5:
+                if idx < 5: #idx é igual a um numero sequencial ex:(123), dado a cada horario
                     turno_atual = f"M{idx + 1}"
                 elif 5 <= idx < 10:
                     turno_atual = f"T{idx - 4}"
@@ -92,12 +92,4 @@ class Grade():
 
 
        
-
-lista = [[["Cálculo 1"],["Segunda", "Terça", "Quarta", "Quinta", "Sexta",'Sábado'],["T1", "T2", "T3", "T4"]], [["Cálculo 2"],["Segunda", "Terça", "Quarta", "Quinta", "Sexta",'Sábado'],["M1", "M2", "M3", "M4"]]]   
-
-    
-rodar = Grade()
-rodar.exibir_grade(lista)
-
-
 

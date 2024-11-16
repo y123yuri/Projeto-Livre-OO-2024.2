@@ -6,6 +6,7 @@ class Grade():
         letra_turno = ""
         dias = []
         horarios = []
+        printar_main = []
         for letra in horario:
             try:
                 letra = int(letra)
@@ -17,6 +18,8 @@ class Grade():
                     for horario in lista_horarios_feitos:
                         if horario[0] == numero_mais_turno:
                             horarios.append(horario[0])
+                            printar_main.append(horario[1])
+                            print(horario[1])
                         else:
                             pass
 
@@ -35,9 +38,8 @@ class Grade():
                         mudar_para_horario = True
                     else:
                         pass
-
-        resultado = [dias, horarios]
-        print(resultado)
+                        
+        resultado = [dias, horarios, printar_main ]
         return resultado
                         
                 
@@ -90,6 +92,19 @@ class Grade():
             print(linha)
             print("-" * (15 * len(dias)))
 
+    def printar_na_main_turma(self,nome_materia, professor, dias, local, horario_unb):
+        # Formatação dos dias
+        if len(dias) == 1:
+            dias_formatados = dias[0]
+        elif len(dias) == 2:
+            dias_formatados = f"{dias[0]} e {dias[1]}"
+        else:
+            dias_formatados = ", ".join(dias[:-1]) + f" e {dias[-1]}"
+        
+        print(
+            f"A turma da matéria {nome_materia} que você escolheu é do(a) professor(a) {professor}, "
+            f"tem o horário {horario_unb},\nque se aplica no(s) dia(s) {dias_formatados}, "
+            f"e no(s) lugares {local}."
+        )
 
        
-

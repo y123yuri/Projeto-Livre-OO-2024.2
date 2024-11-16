@@ -43,10 +43,8 @@ class Grade():
                 
                 
 
-    def exibir_grade(self, lista):
-        
-        # Extrair informações da lista fornecida
-        materia = lista[0][0] 
+    def exibir_grade(self, lista_recebida):
+        # Define dias e horários fixos
         dias = ["Hora", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
         horarios = [
             "08:00 - 09:00", "09:00 - 09:50", "10:00 - 11:00", "11:00 - 11:50",
@@ -54,32 +52,48 @@ class Grade():
             "16:00 - 17:00", "17:00 - 17:50", "18:00 - 19:00", "19:00 - 19:50",
             "19:50 - 20:40", "20:50 - 21:40", "21:40 - 22:30"
         ]
-        turnos = lista[2]
-        turno_dias = lista[1]
 
-        # Cabeçalho com os dias
-        print(" | ".join(f"{dia:^12}" for dia in dias))
-        print("-" * (15 * len(dias)))  # Linha separadora para cabeçalho
+        # Estrutura para armazenar a grade consolidada
+        grade = {dia: {horario: [] for horario in horarios} for dia in dias[1:]}  # Ignora "Hora"
 
-        # Iteração sobre os horários
-        for idx, horario in enumerate(horarios):
+        # Preencher a grade com as matérias
+        for lista in lista_recebida:
+            materia = lista[0][0]
+            turno_dias = lista[1]
+            turnos = lista[2]
+
+            for idx, horario in enumerate(horarios):
+                turno_atual = ""
+                if idx < 5:
+                    turno_atual = f"M{idx + 1}"
+                elif 5 <= idx < 10:
+                    turno_atual = f"T{idx - 4}"
+                elif idx >= 10:
+                    turno_atual = f"N{idx - 9}"
+
+                if turno_atual in turnos:
+                    for dia in turno_dias:
+                        grade[dia][horario].append(materia)
+
+        # Exibir a grade consolidada
+        print(" | ".join(f"{dia:^13}" for dia in dias))
+        print("-" * (14 * len(dias)))
+
+        for horario in horarios:
             linha = f"{horario:^12} |"
-            for dia in dias[1:]:  # Ignorando o título "Hora"
-                if dia in turno_dias and f"T{idx + 1}" in turnos:
-                    linha += f" {materia:^12} |"
+            for dia in dias[1:]:
+                if grade[dia][horario]:
+                    materias = ", ".join(grade[dia][horario])
+                    linha += f" {materias:^12} |"
                 else:
                     linha += f" {'':^12} |"
             print(linha)
-            print("-" * (15 * len(dias)))  # Linha separadora
+            print("-" * (15 * len(dias)))
 
 
        
 
-lista = [
-    ["Cálculo 1"],
-    ["Segunda", "Terça", "Quarta", "Quinta", "Sexta",'Sábado'],
-    ["T1", "T2", "T3", "T4"]
-]        
+lista = [[["Cálculo 1"],["Segunda", "Terça", "Quarta", "Quinta", "Sexta",'Sábado'],["T1", "T2", "T3", "T4"]], [["Cálculo 2"],["Segunda", "Terça", "Quarta", "Quinta", "Sexta",'Sábado'],["M1", "M2", "M3", "M4"]]]   
 
     
 rodar = Grade()

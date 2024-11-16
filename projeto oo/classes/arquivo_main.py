@@ -116,12 +116,36 @@ class Main():
                                                 break
                                             pass
                                         if type(escolha_materia) == int and  len(lista_materia) >= escolha_materia:
-                                            for numero in lista_materia: #numero é igual a lista que criamos
-                                                if numero[1] == escolha_materia:
-                                                    print(f'A matéria que você escolheu foi {numero[0].nome}')
+                                            for materia in lista_materia: #numero é igual a lista que criamos
+                                                if materia[1] == escolha_materia:
+                                                    print(f'A matéria que você escolheu foi {materia[0].nome}')
                                                     print('Agora vamos escolher qual a turma que você deseja.')
-                                                    lista_turma = buscar_metodos.metodo_turma(numero[0].codigo)
-                                                else:
+                                                    lista_turmas = buscar_metodos.metodo_turma(materia[0].codigo)
+                                                    verificacao_turma = input('A turma que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ').upper()
+                                                     
+                                                    if verificacao_turma == 'S':
+                                                        while True:
+                                                            print('Caso queira sair, digite "$".')
+                                                            escolha_turma = input('Digite o número de sua turma: ')
+                                                            try:
+                                                                escolha_turma = int(escolha_turma)
+                                                            except:
+                                                                if escolha_turma == '$':
+                                                                    break
+                                                                pass
+                                                            if type(escolha_turma) == int and  len(lista_turmas) >= escolha_turma:
+                                                                for numero in lista_turmas: #numero é igual a lista que criamos
+                                                                    if numero[1] == escolha_turma:
+                                                                        leitor = classe_grade.leitor(numero[0].horario) #chama a classe grade para decifrar o horario
+                                                                
+                                                                        print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, hora=leitor[2], dias=leitor[0], local=numero[0].local, horario_unb=numero[0].horario)
+                                                                    else:
+                                                                        pass
+                                                            else:
+                                                                pass
+                                                    else:
+                                                        print('Opção inválida, pesquise novamente.')    
+                                                else: 
                                                     pass
                                         
                                         else:

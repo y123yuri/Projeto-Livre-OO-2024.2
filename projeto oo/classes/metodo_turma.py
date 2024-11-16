@@ -21,7 +21,6 @@ class Metodo_busca():
             horario = turma.horario
             local  = turma.local
             semestre = '2024.2'
-            print(contador_turmas)
             print(f'Há a turma do(a) professor(a) {professor}, seu horário é {horario}, seu local é {local}, e seu semestre é {semestre}------------------{contador_turmas}')
             lista_turmas.append([turma, contador_turmas])
         return lista_turmas

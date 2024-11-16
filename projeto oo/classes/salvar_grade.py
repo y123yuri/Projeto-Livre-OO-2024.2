@@ -1,46 +1,51 @@
 class Grade():
     def leitor(self,codigo_horario):
-        horario = codigo_horario
-        resultado = []
-        mudar_para_horario = False
-        letra_turno = ""
-        dias = []
-        horarios = []
-        printar_main = []
-        for letra in horario:
-            try:
-                letra = int(letra)
-                
-                if mudar_para_horario == True:
+        blocos = codigo_horario.split()
 
-                    lista_horarios_feitos = [["M1", "08:00 - 09:00"], ["M2", "09:00 - 09:50"], ["M3", "10:00 - 11:00"], ["M4", "11:00 - 11:50"], ["M5", "12:00 - 13:00"], ["T1", "13:00 - 13:50"], ["T2", "14:00 - 15:00"], ["T3", "15:00 - 15:50"], ["T4", "16:00 - 17:00"], ["T5", "17:00 - 17:50"], ["N1", "19:00 - 19:50"], ["N2", "19:50 - 20:40"], ["N3", "20:50 - 21:40"], ["N4", "21:40 - 22:30"]]
-                    numero_mais_turno = (f"{letra_turno}{letra}")
-                    for horario in lista_horarios_feitos:
-                        if horario[0] == numero_mais_turno:
-                            horarios.append(horario[0])
-                            printar_main.append(horario[1])
-                            print(horario[1])
-                        else:
-                            pass
+        dias_geral = []
+        horarios_geral = []
+        printar_main_geral = []
 
-                else:
-                    lista_horarios_reais = [[2,"Segunda"], [3, "Terça"],[4, "Quarta"],[5, "Quinta"], [6, "Sexta"], [7,"Sábado"]]
-                    for dia in lista_horarios_reais:
-                        if letra == dia[0]:
-                            dias.append(dia[1])
-                        else:
-                            pass
-            except:
-                lista_turno = [["M", "Matutino"], ["T", "Vespertino"], ["N", "Noturno"]]
-                for turno in lista_turno:
-                    if letra == turno[0]:    
-                        letra_turno = letra
-                        mudar_para_horario = True
-                    else:
-                        pass
-                        
-        resultado = [dias, horarios, printar_main ]
-        return resultado
+        lista_horarios_reais = [[2, "Segunda"], [3, "Terça"], [4, "Quarta"], [5, "Quinta"], [6, "Sexta"], [7, "Sábado"]]
+        lista_horarios_feitos = [["M1", "08:00 - 09:00"], ["M2", "09:00 - 09:50"], ["M3", "10:00 - 11:00"], ["M4", "11:00 - 11:50"],
+                                ["M5", "12:00 - 13:00"], ["T1", "13:00 - 13:50"], ["T2", "14:00 - 15:00"], ["T3", "15:00 - 15:50"],
+                                ["T4", "16:00 - 17:00"], ["T5", "17:00 - 17:50"], ["N1", "19:00 - 19:50"], ["N2", "19:50 - 20:40"],
+                                ["N3", "20:50 - 21:40"], ["N4", "21:40 - 22:30"]]
+        lista_turno = [["M", "Matutino"], ["T", "Vespertino"], ["N", "Noturno"]]
+
+        # Processar cada bloco de código
+        for bloco in blocos:
+            dias = []
+            horarios = []
+            printar_main = []
+            letra_turno = ""
+
+            for letra in bloco:
+                if letra.isdigit():
+                    if letra_turno:  # Já identificamos o turno
+                        numero_mais_turno = f"{letra_turno}{letra}"  # Ex: T3, M1
+                        for horario in lista_horarios_feitos:
+                            if horario[0] == numero_mais_turno:
+                                horarios.append(horario[0])
+                                printar_main.append(horario[1])
+                    else:  # Ainda estamos lendo os dias
+                        for dia in lista_horarios_reais:
+                            if int(letra) == dia[0]:
+                                dias.append(dia[1])
+                elif letra.isalpha():  # Letra identificando o turno
+                    for turno in lista_turno:
+                        if letra == turno[0]:
+                            letra_turno = letra
+
+            # Acumular os resultados deste bloco nos resultados gerais
+            dias_geral.extend(dias)
+            horarios_geral.extend(horarios)
+            printar_main_geral.extend(printar_main)
+
+        # Retornar os resultados acumulados
+        resultado_geral = [dias_geral, horarios_geral, printar_main_geral]
+        print(resultado_geral)
+        return resultado_geral
                         
                 
                 
@@ -92,7 +97,7 @@ class Grade():
             print(linha)
             print("-" * (15 * len(dias)))
 
-    def printar_na_main_turma(self,nome_materia, professor, dias, local, horario_unb):
+    def printar_na_main_turma(self,nome_materia, professor, hora, dias, local, horario_unb):
         # Formatação dos dias
         if len(dias) == 1:
             dias_formatados = dias[0]
@@ -104,7 +109,10 @@ class Grade():
         print(
             f"A turma da matéria {nome_materia} que você escolheu é do(a) professor(a) {professor}, "
             f"tem o horário {horario_unb},\nque se aplica no(s) dia(s) {dias_formatados}, "
-            f"e no(s) lugares {local}."
+            f"no horário(s) {hora} e no(s) lugares {local}."
         )
 
-       
+    
+# rodar = Grade()
+
+# rodar.leitor('35M12 26T45')

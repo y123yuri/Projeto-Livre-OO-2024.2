@@ -74,6 +74,7 @@ class Main():
                                             for numero in lista_turmas: #numero é igual a lista que criamos
                                                 if numero[1] == escolha_turma:
                                                     leitor = classe_grade.leitor(numero[0].horario) #chama a classe grade para decifrar o horario
+                                            
                                                     print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, hora=leitor[2], dias=leitor[0], local=numero[0].local, horario_unb=numero[0].horario)
                                                 else:
                                                     pass

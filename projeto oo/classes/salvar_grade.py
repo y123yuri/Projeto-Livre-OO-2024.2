@@ -44,7 +44,7 @@ class Grade():
 
         # Retornar os resultados acumulados
         resultado_geral = [dias_geral, horarios_geral, printar_main_geral]
-        print(resultado_geral)
+        #print(resultado_geral)
         return resultado_geral
                         
                 
@@ -121,6 +121,15 @@ class Grade():
             f"tem o horário {horario_unb},\nque se aplica no(s) dia(s) {dias_formatados}, "
             f"no horário(s) {horarios_formatados} e na(s) salas {local}."
         )
+
+    def color_text(self, text, text_color, background_color=None, style=0):
+        if background_color:
+            return f"\033[{style};{text_color};{background_color}m{text}\033[0m"
+        return f"\033[{style};{text_color}m{text}\033[0m"
+                    
+                #    Normal	0,    Negrito	1,Subtle	2,Sublinhado	4,Piscando	5
+                #Cor do Texto ou Fundo	Código
+                #Preto	30,Vermelho	31,Verde	32,Amarelo	33,Azul	34,Magenta	35,Ciano	36,Branco	37
 
     
 # rodar = Grade()

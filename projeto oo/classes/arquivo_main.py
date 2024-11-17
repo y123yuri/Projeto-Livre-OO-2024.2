@@ -20,33 +20,34 @@ classe_grade = Grade()
 # buscar = Buscar_turmas(procedural_turmas)
 
 
+
 class Main():
     
     def main(self):
         codigo_pesquisado = ''
 
-        print('Bem vindo ao montador de grade da UnB!!!')
-        print('Vamos começar?!')
-        print('Para sair do montador digite $.')
+        print(classe_grade.color_text('Bem vindo ao montador de grade da UnB!!!', text_color=34,style=1))
+        print(classe_grade.color_text('Vamos começar?!', 32))
+        print(classe_grade.color_text('Para sair do montador digite $.',31))
 
         while True:
-            metodo = input('''Selecione o método de buscar que prefere:
---------------Por código da matéria: Digite 1
---------------Por nome da matéria: Digite 2
-''')
+            metodo = input(('''Selecione o método de buscar que prefere:
+--------------Por código da matéria digite "1".
+--------------Por nome da matéria digite "2".
+'''))
             if metodo == '$':
-                print('------------Você desistiu de usar o montador!-------------')
+                print(classe_grade.color_text('------------Você desistiu de usar o montador!-------------',31))
                 break
             elif metodo == '1':
-                print('---------------Agora iremos pesquisar a sua matéria por código até encontrar.')
-                print('Digite "$" para parar de pesquisar')
+                print(classe_grade.color_text('---------------Agora iremos pesquisar a sua matéria por código até encontrar.',32))
+                print(classe_grade.color_text('Digite "$" para parar de pesquisar',31))
                 
                 while True:
 
                     codigo_pesquisado = input('Digite o código da matéria que deseja.--------- ').upper()
                     
                     if codigo_pesquisado == '$':
-                        print('Você desistiu da pesquisa!')
+                        print(classe_grade.color_text('Você desistiu da pesquisa!',31))
                         break
                     else:
                         materia = buscar_metodos_materia.metodo_materia_codigo(codigo_pesquisado)

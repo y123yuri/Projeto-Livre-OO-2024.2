@@ -5,7 +5,7 @@ class Salvar_materias():
 
 
     def tratar_materia(self):
-        with open("projeto oo/arquivos/materias.txt","r", encoding="utf-8") as leitura:
+        with open("projeto oo/arquivos/materias.txt","r", encoding="ISO-8859-1") as leitura:
                 for linha in leitura:
                     partes = linha.split('$') 
                     codigo = partes[0].strip() #separa as coisas, nome e codigo
@@ -23,7 +23,7 @@ class Salvar_turmas():
         self.turmas = []
 
     def tratar_turmas(self):
-        with open("projeto oo/arquivos/turmas.txt","r", encoding="utf-8") as leitura:
+        with open("projeto oo/arquivos/turmas.txt","r", encoding="ISO-8859-1") as leitura:
                  for linha in leitura:
                     partes = linha.split('$') 
                     codigo = partes[0].strip() #separa as coisas, nome e codigo

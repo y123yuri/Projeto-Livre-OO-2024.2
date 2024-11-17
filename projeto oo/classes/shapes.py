@@ -19,8 +19,10 @@ class Turma():
         return f"Turma(nome={self.professor}, codigo={self.materia})"
 
 class Usuario():
-    def __init__(self,turmas_horarios):
+    def __init__(self, turmas_horarios, materias):
         self.turmas_horarios = turmas_horarios
+        self.materias = materias
+
 
     
         

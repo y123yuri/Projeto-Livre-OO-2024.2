@@ -122,10 +122,25 @@ class Grade():
             f"no horário(s) {horarios_formatados} e na(s) salas {local}."
         )
 
-    def color_text(self, text, text_color, background_color=None, style=0):
+    def color_text(self, text, cor, background_color=None, style=0):
+        cores = [
+            ["preto", 30],
+            ["vermelho", 31],
+            ["verde", 32],
+            ["amarelo", 33],
+            ["azul", 34],
+            ["magenta", 35],
+            ["ciano", 36],
+            ["branco", 37]
+        ]
+        for corzinha in cores:
+            if cor == corzinha[0]:
+                cor = corzinha[1]
+            else:
+                pass
         if background_color:
-            return f"\033[{style};{text_color};{background_color}m{text}\033[0m"
-        return f"\033[{style};{text_color}m{text}\033[0m"
+            return f"\033[{style};{cor};{background_color}m{text}\033[0m"
+        return f"\033[{style};{cor}m{text}\033[0m"
                     
                 #    Normal	0,    Negrito	1,Subtle	2,Sublinhado	4,Piscando	5
                 #Cor do Texto ou Fundo	Código
@@ -133,5 +148,5 @@ class Grade():
 
     
 # rodar = Grade()
-
-# rodar.leitor('35M12 26T45')
+# lista = [[["cal"],["Segunda"],["T1"]]]
+# rodar.exibir_grade(lista)

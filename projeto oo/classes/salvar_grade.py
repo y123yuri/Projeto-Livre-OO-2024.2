@@ -105,6 +105,7 @@ class Grade():
 
     def printar_na_main_turma(self,nome_materia, professor, hora, dias, local, horario_unb):
         # Formatação dos dias
+        rodar = Grade()
         
         ordem_dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
 
@@ -122,11 +123,11 @@ class Grade():
         horarios_formatados = ', '.join(hora)
         
 
-        print(
+        print(rodar.color_text(
             f"A turma da matéria {nome_materia} que você escolheu é do(a) professor(a) {professor}, "
             f"tem o horário {horario_unb},\nque se aplica no(s) dia(s) {dias_formatados}, "
-            f"no horário(s) {horarios_formatados} e na(s) salas {local}."
-        )
+            f"no horário(s) {horarios_formatados} e na(s) salas {local}.", 
+        "magenta"))
 
     def color_text(self, text, cor, background_color=None, style=0):
         cores = [

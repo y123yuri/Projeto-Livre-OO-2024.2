@@ -39,12 +39,13 @@ class Main():
             if ver_grade == "S":
                 print(usuario.turmas_horarios)
                 classe_grade.exibir_grade(lista_recebida=usuario.turmas_horarios)
+
             else:
                 pass
-            metodo = input(('''Selecione o método de buscar que prefere:
+            metodo = input(classe_grade.color_text('''Selecione o método de buscar que prefere:
 --------------Por código da matéria digite "1".
 --------------Por nome da matéria digite "2".
-'''))
+''', "verde"))
             if metodo == '$':
                 print(classe_grade.color_text('------------Você desistiu de usar o montador!-------------',"vermelho"))
                 break
@@ -54,7 +55,7 @@ class Main():
                 
                 while True:
 
-                    codigo_pesquisado = input('Digite o código da matéria que deseja.--------- ').upper()
+                    codigo_pesquisado = input(classe_grade.color_text('Digite o código da matéria que deseja.--------- ',"verde")).upper()
                     
                     if codigo_pesquisado == '$':
                         print(classe_grade.color_text('Você desistiu da pesquisa!',"vermelho"))
@@ -69,7 +70,7 @@ class Main():
                                 print(f'A matéria que você escolheu foi {materia[0].nome}')
                                 print('Agora vamos escolher qual a turma que você deseja.')
                                 lista_turmas = buscar_metodos.metodo_turma(materia[0].codigo)
-                                verificacao_turma = input('A turma que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ').upper() 
+                                verificacao_turma = input(classe_grade.color_text('A turma que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ', "verde")).upper() 
                                 
                                 if verificacao_turma == 'S':
                                     while True:
@@ -99,12 +100,12 @@ class Main():
                         
 
             elif metodo == '2':
-                print('Agora iremos pesquisar a sua matéria por nome até encontrar.')
-                print('Digite "$" para parar de pesquisar')
+                print(classe_grade.color_text('Agora iremos pesquisar a sua matéria por nome até encontrar.',"verde"))
+                print(classe_grade.color_text('Digite "$" para parar de pesquisar',"vermelho"))
                 while True:
                     if travador == True:
                         break
-                    nome_pesquisado = input('Digite o nome da matéria que deseja. ').upper()
+                    nome_pesquisado = input(classe_grade.color_text('Digite o nome da matéria que deseja. ',"branco")).upper()
                     if nome_pesquisado == '$':
                         print('Você desistiu da pesquisa!')
                         break
@@ -116,14 +117,14 @@ class Main():
                                 pass
 
                             else:
-                                verificacao_materias = input('A matéria que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ').upper()
+                                verificacao_materias = input(classe_grade.color_text('A matéria que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ', "33")).upper()
                                 #descobrir qual a materia o brother quer
                                 if verificacao_materias == 'S':
                                     while True:
                                         if travador == True:
                                             break
                                         print('Caso queira sair, digite "$".')
-                                        escolha_materia = input('Digite o número de sua matéria: ')
+                                        escolha_materia = input(classe_grade.color_text('Digite o número de sua matéria: ',"azul"))
                                         try:
                                             escolha_materia = int(escolha_materia)
                                         except:
@@ -133,19 +134,19 @@ class Main():
                                         if type(escolha_materia) == int and  len(lista_materia) >= escolha_materia:
                                             for materia in lista_materia: #numero é igual a lista que criamos
                                                 if materia[1] == escolha_materia:
-                                                    print(f'A matéria que você escolheu foi {materia[0].nome}')
-                                                    print('Agora vamos escolher qual a turma que você deseja.')
+                                                    print(classe_grade.color_text(f'A matéria que você escolheu foi {materia[0].nome}',"magenta"))
+                                                    print(classe_grade.color_text('Agora vamos escolher qual a turma que você deseja.',"amarelo"))
                                                     lista_turmas = buscar_metodos.metodo_turma(materia[0].codigo)
-                                                    verificacao_turma = input('A turma que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ').upper()
+                                                    verificacao_turma = input(classe_grade.color_text('A turma que você procura está nas opções?'+'\n'+'Se está, digite "S".'+'\n'+'Se não, digite "N". ',"verde")).upper()
                                                      
                                                     if verificacao_turma == 'S':
                                                     
                                                         while True:
-                                                            print(travador)
+                                    
                                                             if travador == True:
                                                                 break
-                                                            print('Caso queira sair, digite "$".')
-                                                            escolha_turma = input('Digite o número de sua turma: ')
+                                                            print(classe_grade.color_text('Caso queira sair, digite "$".',"vermelho"))
+                                                            escolha_turma = input(classe_grade.color_text('Digite o número de sua turma: ',"amarelo"))
                                                             try:
                                                                 escolha_turma = int(escolha_turma)
                                                             except:
@@ -162,10 +163,10 @@ class Main():
                                                                         if adicionar_na_grade == "S":
                                                                             lista_info_turma = [[[materia[0].nome], leitor[0], leitor[1]]]
                                                                             usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)
-                                                                            print(usuario.turmas_horarios)
+                                                                            
                                                                             print(classe_grade.color_text(f"Você adicinou a matéria {materia[0].nome} com o professor {numero[0].professor}!","amarelo"))
                                                                             travador = True
-                                                                            print(travador)
+                                                               
                                                                             break
                                                                             
                                                                         else:

@@ -86,8 +86,11 @@ class Grade():
                         grade[dia][horario].append(materia)
 
         # Exibir a grade consolidada
-        print(" | ".join(f"{dia:^13}" for dia in dias))
-        print("-" * (14 * len(dias)))
+        # print(" | ".join(f"{dia:^13}" for dia in dias))
+
+        print("     Hora     |    Segunda   |     Terça    |    Quarta    |    Quinta    |    Sexta     |    Sábado    |")
+
+        print("-" * (15 * len(dias)))
 
         for horario in horarios:
             linha = f"{horario:^12} |"
@@ -150,6 +153,7 @@ class Grade():
                 #Preto	30,Vermelho	31,Verde	32,Amarelo	33,Azul	34,Magenta	35,Ciano	36,Branco	37
 
     
-# rodar = Grade()
-# lista = [[["cal"],["Segunda"],["T1"]]]
-# rodar.exibir_grade(lista)
+rodar = Grade()
+lista = [[["algortmos mikfds fkjwsrfnrisf"],["Segunda","Terça", "Quarta"],["T1","T2"]]]
+lista2 = []
+rodar.exibir_grade(lista2)

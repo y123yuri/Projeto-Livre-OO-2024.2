@@ -65,7 +65,10 @@ class Grade():
 
         # Preencher a grade com as matérias
         for lista in lista_recebida:
-            materia = lista[0][0]
+            if len(lista[0][0]) > 9:
+                materia = lista[0][0][:9]
+            else:
+                materia = lista[0][0]
             turno_dias = lista[1]
             turnos = lista[2]
 

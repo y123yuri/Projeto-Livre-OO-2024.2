@@ -158,17 +158,18 @@ class Main():
                                                                         leitor = classe_grade.leitor(numero[0].horario) #chama a classe grade para decifrar o horario
                                                                     
                                                                         print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, hora=leitor[2], dias=leitor[0], local=numero[0].local, horario_unb=numero[0].horario)
-                                                                        adicionar_na_grade = input(classe_grade.color_text("Você gostaria de adicionar essa matéria a sua grade? ","azul")).upper()
+                                                                        adicionar_na_grade = input(classe_grade.color_text("Você gostaria de adicionar essa turma a sua grade? ","azul")).upper()
                                                                         if adicionar_na_grade == "S":
                                                                             lista_info_turma = [[[materia[0].nome], leitor[0], leitor[1]]]
                                                                             usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)
                                                                             print(usuario.turmas_horarios)
-                                                                            print(classe_grade.color_text("Você escolheu uma matéria!","amarelo"))
+                                                                            print(classe_grade.color_text(f"Você adicinou a matéria {materia[0].nome} com o professor {numero[0].professor}!","amarelo"))
                                                                             travador = True
                                                                             print(travador)
                                                                             break
                                                                             
                                                                         else:
+                                                                            print(classe_grade.color_text("Opção inválida!","vermelho"))
                                                                             break
                                                                     else:
                                                                         pass

@@ -44,7 +44,7 @@ class Grade():
 
         # Retornar os resultados acumulados
         resultado_geral = [dias_geral, horarios_geral, printar_main_geral]
-        #print(resultado_geral)
+        print(resultado_geral)
         return resultado_geral
                         
                 
@@ -85,8 +85,6 @@ class Grade():
                     for dia in turno_dias:
                         grade[dia][horario].append(materia)
 
-        # Exibir a grade consolidada
-        # print(" | ".join(f"{dia:^13}" for dia in dias))
 
         print("     Hora     |    Segunda   |     Terça    |    Quarta    |    Quinta    |    Sexta     |    Sábado    |")
 
@@ -158,3 +156,6 @@ rodar = Grade()
 lista = [[["algortmos mikfds fkjwsrfnrisf"],["Segunda","Terça", "Quarta"],["T1","T2"]]]
 lista2 = []
 rodar.exibir_grade(lista2)
+
+
+##modificar leitor de grade, armazenar dentro de cada hora um varialvel que simbolize o dia.

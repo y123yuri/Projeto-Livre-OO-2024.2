@@ -2,8 +2,6 @@ class Grade():
     def leitor(self,codigo_horario):
         blocos = codigo_horario.split()
 
-        dias_geral = []
-        horarios_geral = []
         printar_main_geral = []
 
         lista_horarios_reais = [[2, "Segunda"], [3, "Terça"], [4, "Quarta"], [5, "Quinta"], [6, "Sexta"], [7, "Sábado"]]
@@ -12,43 +10,48 @@ class Grade():
                                 ["T4", "16:00 - 17:00"], ["T5", "17:00 - 17:50"], ["N1", "19:00 - 19:50"], ["N2", "19:50 - 20:40"],
                                 ["N3", "20:50 - 21:40"], ["N4", "21:40 - 22:30"]]
         lista_turno = [["M", "Matutino"], ["T", "Vespertino"], ["N", "Noturno"]]
+        dicionario_horarios = {}
 
         # Processar cada bloco de código
+      
+            
         for bloco in blocos:
             dias = []
             horarios = []
             printar_main = []
             letra_turno = ""
 
-            for letra in bloco:
+            for letra in bloco:  
                 if letra.isdigit():
                     if letra_turno:  # Já identificamos o turno
                         numero_mais_turno = f"{letra_turno}{letra}"  # Ex: T3, M1
+
                         for horario in lista_horarios_feitos:
                             if horario[0] == numero_mais_turno:
-                                horarios.append(horario[0])
+                                horarios.append(horario[0])  # Adiciona horário formatado (08:00 - 09:00, etc)
                                 printar_main.append(horario[1])
                     else:  # Ainda estamos lendo os dias
                         for dia in lista_horarios_reais:
                             if int(letra) == dia[0]:
-                                dias.append(dia[1])
+                                dias.append(dia[1])  # Adiciona o dia (Segunda, Terça, etc)
                 elif letra.isalpha():  # Letra identificando o turno
                     for turno in lista_turno:
                         if letra == turno[0]:
                             letra_turno = letra
 
+            # Atualizar o dicionário de horários para os dias encontrados
+            for dia in dias:
+                if dia not in dicionario_horarios:
+                    dicionario_horarios[dia] = []
+                dicionario_horarios[dia].extend(horarios)
+
             # Acumular os resultados deste bloco nos resultados gerais
-            dias_geral.extend(dias)
-            horarios_geral.extend(horarios)
             printar_main_geral.extend(printar_main)
 
         # Retornar os resultados acumulados
-        resultado_geral = [dias_geral, horarios_geral, printar_main_geral]
+        resultado_geral = [dicionario_horarios, printar_main_geral]
         print(resultado_geral)
         return resultado_geral
-                        
-                
-                
 
     def exibir_grade(self, lista_recebida):
         # Define dias e horários fixos
@@ -62,11 +65,14 @@ class Grade():
 
         # Estrutura para armazenar a grade consolidada
         grade = {dia: {horario: [] for horario in horarios} for dia in dias[1:]}  # Ignora "Hora"
-
+        print(lista_recebida)
         # Preencher a grade com as matérias
         for lista in lista_recebida:
-            if len(lista[0][0]) > 9:
-                materia = lista[0][0][:9]
+            
+            if len(lista[0][0]) > 10:
+                palavras = lista[0][0].split()
+                materia = lista[0][1]
+                print(materia)         
             else:
                 materia = lista[0][0]
             turno_dias = lista[1]
@@ -101,12 +107,14 @@ class Grade():
             print(linha)
             print("-" * (15 * len(dias)))
 
-    def printar_na_main_turma(self,nome_materia, professor, hora, dias, local, horario_unb):
+    def printar_na_main_turma(self,nome_materia, professor, dia, hora, local, horario_unb):
         # Formatação dos dias
         rodar = Grade()
         
         ordem_dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
 
+        dias = list(dia.keys())
+       
         # Código para formatar os dias
         if len(dias) == 1:
             dias_formatados = dias[0]
@@ -153,9 +161,11 @@ class Grade():
 
     
 rodar = Grade()
-lista = [[["algortmos mikfds fkjwsrfnrisf"],["Segunda","Terça", "Quarta"],["T1","T2"]]]
-lista2 = []
-rodar.exibir_grade(lista2)
+
+# rodar.exibir_grade(lista2)
+rodar.leitor("35M34 2T45")
 
 
 ##modificar leitor de grade, armazenar dentro de cada hora um varialvel que simbolize o dia.
+#fazer com dicionarios a lista horario
+

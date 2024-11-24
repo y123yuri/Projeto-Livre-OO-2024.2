@@ -50,7 +50,7 @@ class Grade():
 
         # Retornar os resultados acumulados
         resultado_geral = [dicionario_horarios, printar_main_geral]
-        print(resultado_geral)
+        # print(resultado_geral)
         return resultado_geral
 
     def exibir_grade(self, lista_recebida):
@@ -65,35 +65,33 @@ class Grade():
 
         # Estrutura para armazenar a grade consolidada
         grade = {dia: {horario: [] for horario in horarios} for dia in dias[1:]}  # Ignora "Hora"
-        print(lista_recebida)
+
         # Preencher a grade com as matérias
         for lista in lista_recebida:
-            
             if len(lista[0][0]) > 10:
                 palavras = lista[0][0].split()
                 materia = lista[0][1]
-                print(materia)         
+                # print(materia)         
             else:
-                materia = lista[0][0]
-            turno_dias = lista[1]
-            turnos = lista[2]
+                materia = lista[0][0]  # Obtém a matéria
+            dias_horarios = lista[1]  # Obtém o dicionário de dias e horários
 
-            for idx, horario in enumerate(horarios):
-                turno_atual = ""
-                if idx < 5: #idx é igual a um numero sequencial ex:(123), dado a cada horario
-                    turno_atual = f"M{idx + 1}"
-                elif 5 <= idx < 10:
-                    turno_atual = f"T{idx - 4}"
-                elif idx >= 10:
-                    turno_atual = f"N{idx - 9}"
+            for dia, turnos in dias_horarios.items():  # Itera pelos dias e horários
+                for idx, horario in enumerate(horarios):
+                    turno_atual = ""
+                    if idx < 5:
+                        turno_atual = f"M{idx + 1}"  # Turno matutino
+                    elif 5 <= idx < 10:
+                        turno_atual = f"T{idx - 4}"  # Turno vespertino
+                    elif idx >= 10:
+                        turno_atual = f"N{idx - 9}"  # Turno noturno
 
-                if turno_atual in turnos:
-                    for dia in turno_dias:
+                    # Adiciona a matéria na grade se o horário está listado no dicionário
+                    if turno_atual in turnos:
                         grade[dia][horario].append(materia)
 
-
+        # Imprimir a grade formatada
         print("     Hora     |    Segunda   |     Terça    |    Quarta    |    Quinta    |    Sexta     |    Sábado    |")
-
         print("-" * (15 * len(dias)))
 
         for horario in horarios:
@@ -106,6 +104,7 @@ class Grade():
                     linha += f" {'':^12} |"
             print(linha)
             print("-" * (15 * len(dias)))
+
 
     def printar_na_main_turma(self,nome_materia, professor, dia, hora, local, horario_unb):
         # Formatação dos dias

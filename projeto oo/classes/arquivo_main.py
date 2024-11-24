@@ -14,7 +14,6 @@ buscar_metodos = Metodo_busca()
 classe_grade = Grade()
 
 
-
 #iniciando o metodo de salvar e buscar turmas
 # procedural_turmas = Salvar_turmas()
 # procedural_turmas.tratar_turmas()
@@ -26,7 +25,7 @@ class Main():
     
     def main(self):
         usuario = Usuario(materias=[], turmas_horarios=[])
-
+        lista_salvar_horarios = ""
         codigo_pesquisado = ''
 
         print(classe_grade.color_text('Bem vindo ao montador de grade da UnB!!!', cor="azul",style=1))
@@ -37,7 +36,7 @@ class Main():
             travador = False
             ver_grade = input(classe_grade.color_text("Gostaria de ver como está sua grade?\n Se sim, digite 'S'.\n Se não, digite 'N'\n","verde")).upper()
             if ver_grade == "S":
-                print(usuario.turmas_horarios)
+                # print(usuario.turmas_horarios)
                 classe_grade.exibir_grade(lista_recebida=usuario.turmas_horarios)
 
             else:
@@ -57,7 +56,7 @@ class Main():
                     if travador == True:
                         break
 
-                    codigo_pesquisado = input(classe_grade.color_text('Digite o código da matéria que deseja.--------- ',"verde")).upper()
+                    codigo_pesquisado = input(classe_grade.color_text('Digite o código da matéria que deseja.--------- ',"verde")).upper().strip()
                     
                     if codigo_pesquisado == '$':
                         print(classe_grade.color_text('Você desistiu da pesquisa!',"vermelho"))
@@ -88,15 +87,57 @@ class Main():
                                             pass
                                         if type(escolha_turma) == int and  len(lista_turmas) >= escolha_turma:
                                             for numero in lista_turmas: #numero é igual a lista que criamos
+                                                if travador == True:
+                                                    break
                                                 if numero[1] == escolha_turma:
                                                     leitor = classe_grade.leitor(numero[0].horario) #chama a classe grade para decifrar o horario
                                             
                                                     print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, dia=leitor[0], hora=leitor[1], local=numero[0].local, horario_unb=numero[0].horario)
                                                     adicionar_na_grade = input(classe_grade.color_text("Você gostaria de adicionar essa turma a sua grade? ","azul")).upper()
                                                     if adicionar_na_grade == "S":
-                                                        lista_info_turma = [[[materia[0].nome, materia[0].codigo], leitor[0]]]
-                                                        usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)
-                                                        
+                                                        if usuario.turmas_horarios != []:
+                                                            lista_info_turma = [[materia[0].nome, materia[0].codigo], leitor[0]]
+
+
+                                                            for materia_usuario in usuario.materias:
+                                                                if materia[0].nome == materia_usuario:
+                                                                    print(classe_grade.color_text("Não é possível botar essa matéria em sua grade por já ter escolhido ela antes!!", "vermelho"))
+                                                                    print(classe_grade.color_text("Pesquise novamente","vermelho"))
+                                                                    travador = True
+                                                                    break
+                                                            
+                                                            for turma_lista_usuario in usuario.turmas_horarios:
+                                                                if travador == True:
+                                                                    break
+                                                                horarios_break = turma_lista_usuario[1] #pego os dias que ele ja tem aula
+
+                                                                print(horarios_break, "sou o horario break")
+                                                                for dias_break in horarios_break.keys(): #dia break sao os dias que ele ja tem aula
+                                                                    print(dias_break,"sou o dias break")
+
+                                                                    lista_keys = list(lista_info_turma[1].keys()) #isso daqui puxa qual é a matéria que ele esta querendo adicionar, os seus dias no caso
+                                                                    print(lista_keys, "sou a lista keys")
+                                                                    if dias_break in lista_keys: #tem que ser um if mesmo
+                                                                        horarios_verificacao = horarios_break[f"{dias_break}"].values()
+                                                                        vericacao_horario_existente = list(lista_info_turma[1][f"{dias_break}"].values())
+                                                                        print(horarios_verificacao,"OOOOOOOOOOOOOO",vericacao_horario_existente)
+                                                                        if any(item in horarios_verificacao for item in vericacao_horario_existente):
+                                                                            print(classe_grade.color_text(f"Não é possível adicionar a materia {materia[0].nome}, pois está conflitando o horário com outras matérias!", "vermelho"))
+                                                                            print(classe_grade.color_text("Pesquise novamente!","vermelho"))
+                                                                            travador = True
+                                                                            break
+
+                                                            lista_antiga_turmas_horarios = usuario.turmas_horarios
+                                                            lista_antiga_materia = usuario.materias
+                                                            lista_antiga_turmas_horarios.append(lista_info_turma)
+                                                            lista_antiga_materia.append(materia[0].nome)
+                                                            usuario = Usuario(materias=lista_antiga_materia, turmas_horarios=lista_antiga_turmas_horarios)
+
+                                                        else:
+                                                            lista_info_turma = [[[materia[0].nome, materia[0].codigo], leitor[0]]]
+                                                            usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)                                                        
+                                    
+
                                                         print(classe_grade.color_text(f"Você adicinou a matéria {materia[0].nome} com o professor {numero[0].professor}!","amarelo"))
                                                         travador = True
                                             
@@ -122,7 +163,7 @@ class Main():
                 while True:
                     if travador == True:
                         break
-                    nome_pesquisado = input(classe_grade.color_text('Digite o nome da matéria que deseja. ',"branco")).upper()
+                    nome_pesquisado = input(classe_grade.color_text('Digite o nome da matéria que deseja. ',"branco")).upper().strip()
                     if nome_pesquisado == '$':
                         print('Você desistiu da pesquisa!')
                         break
@@ -172,15 +213,41 @@ class Main():
                                                                 pass
                                                             if type(escolha_turma) == int and  len(lista_turmas) >= escolha_turma:
                                                                 for numero in lista_turmas: #numero é igual a lista que criamos
+                                                                    if travador == True:
+                                                                        break
                                                                     if numero[1] == escolha_turma:
                                                                         leitor = classe_grade.leitor(numero[0].horario) #chama a classe grade para decifrar o horario
                                                                     
                                                                         print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, hora=leitor[1], dia=leitor[0], local=numero[0].local, horario_unb=numero[0].horario)
                                                                         adicionar_na_grade = input(classe_grade.color_text("Você gostaria de adicionar essa turma a sua grade? ","azul")).upper()
                                                                         if adicionar_na_grade == "S":
-                                                                            lista_info_turma = [[[materia[0].nome, materia[0].codigo], leitor[0], leitor[1]]]
-                                                                            usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)
-                                                                            
+                                                                            lista_info_turma = [[[materia[0].nome, materia[0].codigo], leitor[0]]]
+                                                                             
+                                                                            for materia_usuario in usuario.materias:
+                                                                                if materia[0].nome == materia_usuario:
+                                                                                    print(classe_grade.color_text("Não é possível botar essa matéria em sua grade, por já ter escolhido ela antes!!", "vermelho"))
+                                                                                    print(classe_grade.color_text("Pesquise novamente","vermelho"))
+                                                                                    travador = True
+                                                                                    break
+                                                        
+                                                                            for turma_lista_usuario in usuario.turmas_horarios:
+
+                                                                                print(turma_lista_usuario)
+
+                                                                            if travador == True:
+                                                                                break
+
+                                                                            if usuario.turmas_horarios == []:
+                                                                                usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)
+                                                                            else:
+                                                                                lista_info_turma = [[materia[0].nome, materia[0].codigo], leitor[0]]
+
+                                                                                lista_antiga_turmas_horarios = usuario.turmas_horarios
+                                                                                lista_antiga_materia = usuario.materias
+                                                                                lista_antiga_turmas_horarios.append(lista_info_turma)
+                                                                                lista_antiga_materia.append(materia[0].nome)
+                                                                                usuario = Usuario(materias=lista_antiga_materia, turmas_horarios=lista_antiga_turmas_horarios)
+                                                                                
                                                                             print(classe_grade.color_text(f"Você adicinou a matéria {materia[0].nome} com o professor {numero[0].professor}!","amarelo"))
                                                                             travador = True
                                                                

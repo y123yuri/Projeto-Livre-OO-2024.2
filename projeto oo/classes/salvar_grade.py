@@ -158,13 +158,51 @@ class Grade():
                 #Cor do Texto ou Fundo	Código
                 #Preto	30,Vermelho	31,Verde	32,Amarelo	33,Azul	34,Magenta	35,Ciano	36,Branco	37
 
+    def verificacao(self, lista_info_turma, usuario_materias, usuario_turma_horarios):
+        classe_grade =  Grade()
+        for materia_usuario in usuario_materias:
+            if lista_info_turma[0][0] == materia_usuario:
+                print(classe_grade.color_text("Não é possível botar essa matéria em sua grade por já ter escolhido ela antes!!", "vermelho"))
+                print(classe_grade.color_text("Pesquise novamente","vermelho"))
+                travador = True
+                return 1
+        
+        for turma_lista_usuario in usuario_turma_horarios:
+            horarios_break = turma_lista_usuario[1] #pego os dias que ele ja tem aula
+            
     
+            for dias_break in horarios_break.keys(): #dia break sao os dias que ele ja tem aula
+
+                lista_keys = list(lista_info_turma[1].keys()) #isso daqui puxa qual é a matéria que ele esta querendo adicionar, os seus dias no caso
+
+                if dias_break in lista_keys: #tem que ser um if mesmo
+                    horarios_verificacao = horarios_break[f"{dias_break}"]
+                    vericacao_horario_existente = list(lista_info_turma[1][f"{dias_break}"])
+
+                    if any(item in horarios_verificacao for item in vericacao_horario_existente):
+                        print(classe_grade.color_text(f"Não é possível adicionar a materia {lista_info_turma[0][0]}, pois está conflitando o horário com a matéria {turma_lista_usuario[0][0]}!", "vermelho"))
+                        print(classe_grade.color_text("Pesquise novamente!","vermelho"))
+                        return 1
+                        
+
+
+
+
+
+
+
+
+
+
+
+
 rodar = Grade()
 
 # rodar.exibir_grade(lista2)
 rodar.leitor("35M34 2T45")
 
 
-##modificar leitor de grade, armazenar dentro de cada hora um varialvel que simbolize o dia.
-#fazer com dicionarios a lista horario
+#### adicionar a possibilidade de trocar de turma e de tirar uma matéria, caso seja a mesma materia poder trocar por uma ja antiga.
+
+
 

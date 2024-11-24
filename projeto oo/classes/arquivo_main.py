@@ -98,34 +98,11 @@ class Main():
                                                         if usuario.turmas_horarios != []:
                                                             lista_info_turma = [[materia[0].nome, materia[0].codigo], leitor[0]]
 
-
-                                                            for materia_usuario in usuario.materias:
-                                                                if materia[0].nome == materia_usuario:
-                                                                    print(classe_grade.color_text("Não é possível botar essa matéria em sua grade por já ter escolhido ela antes!!", "vermelho"))
-                                                                    print(classe_grade.color_text("Pesquise novamente","vermelho"))
-                                                                    travador = True
-                                                                    break
-                                                            
-                                                            for turma_lista_usuario in usuario.turmas_horarios:
-                                                                if travador == True:
-                                                                    break
-                                                                horarios_break = turma_lista_usuario[1] #pego os dias que ele ja tem aula
-
-                                                                print(horarios_break, "sou o horario break")
-                                                                for dias_break in horarios_break.keys(): #dia break sao os dias que ele ja tem aula
-                                                                    print(dias_break,"sou o dias break")
-
-                                                                    lista_keys = list(lista_info_turma[1].keys()) #isso daqui puxa qual é a matéria que ele esta querendo adicionar, os seus dias no caso
-                                                                    print(lista_keys, "sou a lista keys")
-                                                                    if dias_break in lista_keys: #tem que ser um if mesmo
-                                                                        horarios_verificacao = horarios_break[f"{dias_break}"].values()
-                                                                        vericacao_horario_existente = list(lista_info_turma[1][f"{dias_break}"].values())
-                                                                        print(horarios_verificacao,"OOOOOOOOOOOOOO",vericacao_horario_existente)
-                                                                        if any(item in horarios_verificacao for item in vericacao_horario_existente):
-                                                                            print(classe_grade.color_text(f"Não é possível adicionar a materia {materia[0].nome}, pois está conflitando o horário com outras matérias!", "vermelho"))
-                                                                            print(classe_grade.color_text("Pesquise novamente!","vermelho"))
-                                                                            travador = True
-                                                                            break
+                                                            variavel_travamento = classe_grade.verificacao(lista_info_turma=lista_info_turma, usuario_materias=usuario.materias, usuario_turma_horarios=usuario.turmas_horarios)
+    
+                                                            if variavel_travamento == 1:
+                                                                travador = True
+                                                                break #esse break é importante
 
                                                             lista_antiga_turmas_horarios = usuario.turmas_horarios
                                                             lista_antiga_materia = usuario.materias
@@ -221,36 +198,30 @@ class Main():
                                                                         print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, hora=leitor[1], dia=leitor[0], local=numero[0].local, horario_unb=numero[0].horario)
                                                                         adicionar_na_grade = input(classe_grade.color_text("Você gostaria de adicionar essa turma a sua grade? ","azul")).upper()
                                                                         if adicionar_na_grade == "S":
-                                                                            lista_info_turma = [[[materia[0].nome, materia[0].codigo], leitor[0]]]
-                                                                             
-                                                                            for materia_usuario in usuario.materias:
-                                                                                if materia[0].nome == materia_usuario:
-                                                                                    print(classe_grade.color_text("Não é possível botar essa matéria em sua grade, por já ter escolhido ela antes!!", "vermelho"))
-                                                                                    print(classe_grade.color_text("Pesquise novamente","vermelho"))
-                                                                                    travador = True
-                                                                                    break
-                                                        
-                                                                            for turma_lista_usuario in usuario.turmas_horarios:
-
-                                                                                print(turma_lista_usuario)
-
-                                                                            if travador == True:
-                                                                                break
-
-                                                                            if usuario.turmas_horarios == []:
-                                                                                usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)
-                                                                            else:
+                                                                            if usuario.turmas_horarios != []:
                                                                                 lista_info_turma = [[materia[0].nome, materia[0].codigo], leitor[0]]
+
+                                                                                variavel_travamento = classe_grade.verificacao(lista_info_turma=lista_info_turma, usuario_materias=usuario.materias, usuario_turma_horarios=usuario.turmas_horarios)
+                        
+                                                                                if variavel_travamento == 1:
+                                                                                    travador = True
+                                                                                    break #esse break é importante
 
                                                                                 lista_antiga_turmas_horarios = usuario.turmas_horarios
                                                                                 lista_antiga_materia = usuario.materias
                                                                                 lista_antiga_turmas_horarios.append(lista_info_turma)
                                                                                 lista_antiga_materia.append(materia[0].nome)
                                                                                 usuario = Usuario(materias=lista_antiga_materia, turmas_horarios=lista_antiga_turmas_horarios)
-                                                                                
+
+                                                                            else:
+                                                                                lista_info_turma = [[[materia[0].nome, materia[0].codigo], leitor[0]]]
+                                                                                usuario = Usuario(materias=[materia[0].nome], turmas_horarios=lista_info_turma)                                                        
+                                                        
+
                                                                             print(classe_grade.color_text(f"Você adicinou a matéria {materia[0].nome} com o professor {numero[0].professor}!","amarelo"))
                                                                             travador = True
-                                                               
+                                                                            
+                                                                        
                                                                             break
                                                                             
                                                                         else:

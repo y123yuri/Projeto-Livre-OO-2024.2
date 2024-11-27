@@ -79,4 +79,59 @@ class Metodo_busca_materia():
             print("Nenhuma matéria encontrada com esse nome.")
             return lista_materia
 
-        
+class Remover_materia():
+
+    def remover(self, lista_usuario_horario, lista_usuario_materia):
+        classe_grade = Grade()
+        if lista_usuario_horario == []:
+                    print(classe_grade.color_text("Você não pode retirar uma matéria da sua grade, pois não escolheu nenhuma!","vermelho"))
+        else:
+            print(classe_grade.color_text(f"Essas são as matérias que você possui:","amarelo"))
+            contador_cor = 0
+            lista_total = []
+            lista_voltar_main_materias = []
+            lista_voltar_main_horarios = []
+
+            for materia in lista_usuario_horario:
+                contador_cor += 1
+                append = [materia[0][0], contador_cor]
+                lista_total.append(append)
+                if contador_cor % 2 == 0:
+                    print(classe_grade.color_text(f"{materia[0][0]} ---------- {contador_cor}","magenta"))
+                else:
+                    print(classe_grade.color_text(f"{materia[0][0]} ---------- {contador_cor}","azul"))
+
+            escolha_exclusao = input(classe_grade.color_text("Digite o número da matéria que deseja excluir -------- ","amarelo"))
+            try: 
+                escolha_exclusao = int(escolha_exclusao)
+            except:
+                pass
+            if type(escolha_exclusao) == int and len(lista_total) >= escolha_exclusao:
+                for numero in lista_total:
+                    if numero[1] == escolha_exclusao:
+                        continuar =  input(classe_grade.color_text("Você quer continuar com a retirada de matéria?\nSe sim, digite 1\nSe não, digite 2\n","verde"))
+                        if continuar == "1":
+                            materia = numero[0]
+                            for retirar in lista_usuario_materia:
+                                if retirar == materia:
+                                    pass
+                                else:
+                                    lista_voltar_main_materias.append(retirar)
+
+                            for retirar in lista_usuario_horario:
+                                if materia == retirar[0][0]:
+                                    pass
+                                else:
+                                    lista_voltar_main_horarios.append(retirar)
+                            print(classe_grade.color_text(f"Sua matéria {materia} foi retirada com sucesso!","amarelo"))
+                            lista_return = lista_voltar_main_horarios+lista_voltar_main_materias
+                            return lista_return
+
+                        else:
+                            print(classe_grade.color_text("Você optou por não exluir!!","vermelho"))   
+                            return 0 
+                             
+
+            else:
+                print(classe_grade.color_text("Você escolheu uma opção inválida, tente remover novamente!!","vermelho"))   
+                return 0 

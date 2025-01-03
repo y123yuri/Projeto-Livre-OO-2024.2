@@ -85,6 +85,7 @@ class Remover_materia():
         classe_grade = Grade()
         if lista_usuario_horario == []:
                     print(classe_grade.color_text("Você não pode retirar uma matéria da sua grade, pois não escolheu nenhuma!","vermelho"))
+                    return ''
         else:
             print(classe_grade.color_text(f"Essas são as matérias que você possui:","amarelo"))
             contador_cor = 0
@@ -124,14 +125,14 @@ class Remover_materia():
                                 else:
                                     lista_voltar_main_horarios.append(retirar)
                             print(classe_grade.color_text(f"Sua matéria {materia} foi retirada com sucesso!","amarelo"))
-                            lista_return = lista_voltar_main_horarios+lista_voltar_main_materias
+                            lista_return = [lista_voltar_main_horarios]+[lista_voltar_main_materias]
                             return lista_return
 
                         else:
                             print(classe_grade.color_text("Você optou por não exluir!!","vermelho"))   
-                            return 0 
+                            return  ''
                              
 
             else:
                 print(classe_grade.color_text("Você escolheu uma opção inválida, tente remover novamente!!","vermelho"))   
-                return 0 
+                return ''

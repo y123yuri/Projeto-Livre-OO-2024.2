@@ -3,6 +3,8 @@ from buscar import *
 from executor_txt import *
 from metodo_turma import *
 from salvar_grade import *
+import os
+
 
 #iniciando o metodo de salvar e buscar materias
 procedural_materias = Salvar_materias()
@@ -14,6 +16,8 @@ buscar_metodos = Metodo_busca()
 classe_grade = Grade()
 remover = Remover_materia()
 
+clear = Limpar()
+
 #iniciando o metodo de salvar e buscar turmas
 # procedural_turmas = Salvar_turmas()
 # procedural_turmas.tratar_turmas()
@@ -23,6 +27,7 @@ travador = False
 
 class Main():
     
+
     def main(self):
         usuario = Usuario(materias=[], turmas_horarios=[])
         lista_salvar_horarios = ""
@@ -37,17 +42,34 @@ class Main():
             metodo_escolha = input(classe_grade.color_text("Gostaria de ver como está sua grade? --------- Digite 1\nGostaria de remover uma matéria? --------- Digite 2\nGostaria de adicionar uma matéria? --------- Digite 3\nGostaria de sair do programa? --------- Digite $\n","verde")).upper()
             if metodo_escolha == "1":
                 # print(usuario.turmas_horarios)
+                clear.clear_terminal()
                 classe_grade.exibir_grade(lista_recebida=usuario.turmas_horarios)
+                print(usuario.turmas_horarios, 'aooba', usuario.materias)
 
             elif metodo_escolha == "2":
+                # clear.clear_terminal()
                 lista_return = remover.remover(lista_usuario_horario=usuario.turmas_horarios, lista_usuario_materia=usuario.materias)
-                print(lista_return)
+                if lista_return == '' or lista_return == []:
+                    usuario.turmas_horarios = []
+                    usuario.materias = []
+                else:
+                    print(lista_return, 'sou a lista return')
+                    print(usuario.turmas_horarios, 'aooba', usuario.materias)
+                    usuario.turmas_horarios = horarios_e_nomes[0]
+                    usuario.materias = horarios_e_nomes[1]
+
+                    #arrumar a deletação de materias.
+                        
+                
 
             elif metodo_escolha == "3":
+                clear.clear_terminal()
+
                 metodo = input(classe_grade.color_text('''Selecione o método de buscar que prefere:
 --------------Por código da matéria digite "1".
 --------------Por nome da matéria digite "2".
 ''', "amarelo"))
+                
                 if metodo == '$':
                     print(classe_grade.color_text('------------Você desistiu de usar o montador!-------------',"vermelho"))
                     break
@@ -96,7 +118,7 @@ class Main():
                                                         leitor = classe_grade.leitor(numero[0].horario) #chama a classe grade para decifrar o horario
                                                 
                                                         print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, dia=leitor[0], hora=leitor[1], local=numero[0].local, horario_unb=numero[0].horario)
-                                                        adicionar_na_grade = input(classe_grade.color_text("Você gostaria de adicionar essa turma a sua grade? ","azul")).upper()
+                                                        adicionar_na_grade = input(classe_grade.color_text('Você gostaria de adicionar essa turma a sua grade?\nSe sim, digite "S"\nSe não, digite "N" ',"azul")).upper()
                                                         if adicionar_na_grade == "S":
                                                             if usuario.turmas_horarios != []:
                                                                 lista_info_turma = [[materia[0].nome, materia[0].codigo], leitor[0]]
@@ -131,7 +153,7 @@ class Main():
                                             else:
                                                 pass
                                     else:
-                                        print('Opção inválida, pesquise novamente.')
+                                        print('Você digitou não, pesquise novamente.')
                                 else:
                                     print('Opção inválida, pesquise novamente.')
                                     break   
@@ -199,7 +221,7 @@ class Main():
                                                                             leitor = classe_grade.leitor(numero[0].horario) #chama a classe grade para decifrar o horario
                                                                         
                                                                             print_turma = classe_grade.printar_na_main_turma(nome_materia=materia[0].nome, professor=numero[0].professor, hora=leitor[1], dia=leitor[0], local=numero[0].local, horario_unb=numero[0].horario)
-                                                                            adicionar_na_grade = input(classe_grade.color_text("Você gostaria de adicionar essa turma a sua grade? ","azul")).upper()
+                                                                            adicionar_na_grade = input(classe_grade.color_text('Você gostaria de adicionar essa turma a sua grade?\nSe sim, digite "S"\nSe não, digite "N" ',"azul")).upper()
                                                                             if adicionar_na_grade == "S":
                                                                                 if usuario.turmas_horarios != []:
                                                                                     lista_info_turma = [[materia[0].nome, materia[0].codigo], leitor[0]]
@@ -236,7 +258,7 @@ class Main():
                                                                 else:
                                                                     pass
                                                         else:
-                                                            print('Opção inválida, pesquise novamente.')    
+                                                            print('Você digitou não, pesquise novamente.')    
                                                     else: 
                                                         pass
                                             
@@ -248,8 +270,8 @@ class Main():
                                         print('Pesquise novamente.')
                                         break
 
-            elif metodo_escolha == "4":
-                print(classe_grade.color_text("Obrigado por usar o montador de grade!!","amarelho"))
+            elif metodo_escolha == "$":
+                print(classe_grade.color_text("Obrigado por usar o montador de grade!!","amarelo"))
                 break
 
             else:

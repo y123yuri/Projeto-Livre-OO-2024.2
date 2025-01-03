@@ -1,4 +1,5 @@
 from shapes import *
+import os
 class Salvar_materias():
     def __init__(self):
         self.materias = []  # Lista para armazenar as instâncias de Materia
@@ -37,5 +38,8 @@ class Salvar_turmas():
            
     def get_turmas(self):
             return self.turmas #retorna as turmas
-
+class Limpar():
+    import os
+    def clear_terminal(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
 

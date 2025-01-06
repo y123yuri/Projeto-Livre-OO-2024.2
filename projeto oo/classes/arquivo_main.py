@@ -4,6 +4,8 @@ from executor_txt import *
 from metodo_turma import *
 from salvar_grade import *
 import os
+import json
+
 
 
 #iniciando o metodo de salvar e buscar materias
@@ -36,7 +38,26 @@ class Main():
         print(classe_grade.color_text('Bem vindo ao montador de grade da UnB!!!', cor="azul",style=1))
         print(classe_grade.color_text('Vamos começar?!', "verde"))
         print(classe_grade.color_text('Para sair do montador digite $.',"vermelho"))
+        nome_usuario = input(classe_grade.color_text('Qual é o seu nome? ','amarelo'))
+        if os.path.exists('database_json_usuarios.txt'):
+            with open('database_json_usuarios.txt','r', encoding='utf-8') as ler:
+                conteudo = json.load(ler)
+                if nome_usuario in conteudo.values():
+            
+                    continuar_grade = input(classe_grade.color_text(f'Bem vindo de volta {nome_usuario}, você já usou o Montador de Grade, Gostaria de continuar com a sua grade antiga?\nSe sim, digite "S".\nSe não, digite "N". ','amarelo')).upper()
+                    if continuar_grade == 'S':
+                        usuario = Usuario(materias=conteudo['nomes_materias'], turmas_horarios=conteudo['turmas_e_horarios'])
+                    else:
+                        print(classe_grade.color_text('Tudo ótimo, pode recriar as suas grades do zero!', 'magenta'))
+                        
+                
+                else:
+                    print(classe_grade.color_text(f'Seja Bem vindo, {nome_usuario}!\nAcho que é a sua primeira vez usando o Montador de Grade!!!!\nAproveite!','amarelo'))
+                    pass
 
+                        
+        else:
+            print(classe_grade.color_text(f'Seja Bem vindo, {nome_usuario}!\nAcho que é a sua primeira vez usando o Montador de Grade!!!!\nAproveite!','amarelo'))
         while True:
             travador = False
             metodo_escolha = input(classe_grade.color_text("Gostaria de ver como está sua grade? --------- Digite 1\nGostaria de remover uma matéria? --------- Digite 2\nGostaria de adicionar uma matéria? --------- Digite 3\nGostaria de sair do programa? --------- Digite $\n","verde")).upper()
@@ -44,23 +65,18 @@ class Main():
                 # print(usuario.turmas_horarios)
                 clear.clear_terminal()
                 classe_grade.exibir_grade(lista_recebida=usuario.turmas_horarios)
-                print(usuario.turmas_horarios, 'aooba', usuario.materias)
+                
 
             elif metodo_escolha == "2":
                 # clear.clear_terminal()
                 lista_return = remover.remover(lista_usuario_horario=usuario.turmas_horarios, lista_usuario_materia=usuario.materias)
-                if lista_return == '' or lista_return == []:
-                    usuario.turmas_horarios = []
-                    usuario.materias = []
+                if lista_return == '':
+                    pass  
                 else:
-                    print(lista_return, 'sou a lista return')
-                    print(usuario.turmas_horarios, 'aooba', usuario.materias)
-                    usuario.turmas_horarios = horarios_e_nomes[0]
-                    usuario.materias = horarios_e_nomes[1]
-
-                    #arrumar a deletação de materias.
-                        
-                
+                    
+                    usuario.turmas_horarios = lista_return[0]
+                    usuario.materias = lista_return[1]
+  
 
             elif metodo_escolha == "3":
                 clear.clear_terminal()
@@ -271,7 +287,26 @@ class Main():
                                         break
 
             elif metodo_escolha == "$":
+                if os.path.exists('database_json_usuarios.txt'):
+                    os.remove('database_json_usuarios.txt')
+                else:
+                    pass #nao existe o arquivo
+
+                if not os.path.exists('database_json_usuarios.txt') and usuario.turmas_horarios != [] and usuario.materias != []:
+                    banco_usuario = {
+                        'usuario_banco' : nome_usuario,
+                        'turmas_e_horarios' : usuario.turmas_horarios,
+                        'nomes_materias' : usuario.materias
+
+                    }
+                    with open('database_json_usuarios.txt','w',encoding='utf-8') as criar:
+                        json.dump(banco_usuario, criar, ensure_ascii=False ,indent=4)
+                    print(classe_grade.color_text('Sua grade está salva em nosso banco de dados para caso queira ver-la novamente depois!','verde'))
+                else:
+                    pass
                 print(classe_grade.color_text("Obrigado por usar o montador de grade!!","amarelo"))
+                
+
                 break
 
             else:

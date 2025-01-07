@@ -1,1 +1,114 @@
+==========================================
+🎓 UnBGradeBuilder  🎓
+
+Uma ferramenta de terminal para organizar sua grade horária na UnB!
+
+🔹 Descrição
+
+O UnBGradeBuilder é uma ferramenta criada para ajudar alunos da Universidade de Brasília (UnB) a montar grades horárias de forma simples e eficiente!
+
+Funcionalidades principais:
+
+🕋 Visualização de Turmas: Veja as disciplinas e turmas disponíveis, com detalhes sobre professores e horários.
+
+⚠️ Detecção de Conflitos: Identifique automaticamente conflitos de horário ao montar sua grade.
+
+🔧 Gerenciamento de Grade: Adicione e remova disciplinas facilmente para personalizar sua grade.
+
+🎨 Objetivo
+
+Simplificar o processo de montagem de grades acadêmicas na UnB, proporcionando:
+
+Exploração rápida das turmas.
+
+Detecção automática de conflitos de horário.
+
+Personalização prática da grade acadêmica.
+
+Com o UnBGradeBuilder, sua organização acadêmica fica muito mais fácil!
+
+🔧 Tecnologias Utilizadas
+
+Linguagem: Python 3.x
+
+Bibliotecas: Apenas a biblioteca padrão do Python (sem dependências externas).
+
+🔧 Como Rodar
+
+Certifique-se de ter o Python 3.x ou superior instalado no seu sistema.
+
+Baixe ou clone este repositório.
+
+Navegue até o diretório onde o arquivo main.py está localizado.
+
+Execute o programa:
+
+Pelo terminal:
+
+python main.py
+
+Ou abra o arquivo main.py na sua IDE ou editor de código preferido e clique em Run.
+
+🏛️ Estrutura do Projeto
+
+projeto oo/
+├── arquivos/
+│   ├── materias.txt        # Dados raspados dos nomes das disciplinas
+│   ├── turmas.txt          # Dados raspados das turmas e professores
+├── classes/
+│   ├── arquivo_main.py     # Lógica principal do programa
+│   ├── buscar.py           # Funções de busca de informações
+│   ├── executor_txt.py     # Manipulação de arquivos texto
+│   ├── metodo_turma.py     # Gerenciamento de turmas e grades
+│   ├── salvar_grade.py     # Exibição e gerenciamento da grade
+│   ├── shapes.py           # Classes base (Materia, Turma, Usuario)
+├── webscraper/             # Pasta de raspagem de dados (web scraping)
+├── main.py                 # Arquivo principal
+
+🔎 Detalhes dos Arquivos
+
+main.py:
+
+Gerencia a interação com o usuário e o fluxo do programa.
+
+Valida conflitos de horário e salva informações.
+
+buscar.py:
+
+Classes para buscar informações de disciplinas e turmas.
+
+executor_txt.py:
+
+Manipula os arquivos de texto (materias.txt e turmas.txt).
+
+metodo_turma.py:
+
+Gerencia buscas avançadas e editações de turmas e grades.
+
+salvar_grade.py:
+
+Exibe a grade acadêmica e detecta conflitos de horário.
+
+shapes.py:
+
+Define classes básicas como Materia, Turma e Usuario.
+
+webscraper:
+
+Scripts para raspar dados diretamente do SIGAA e salvar em arquivos texto.
+
+🔒 Licença
+
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+
+🛠️ Contribuições
+
+Contribuições são bem-vindas!
+
+Se você tiver sugestões ou encontrar problemas, abra uma issue ou envie um pull request. 📊
+
+==========================================
+✨ Feito com dedicação para a comunidade da UnB! ✨
+
+
 

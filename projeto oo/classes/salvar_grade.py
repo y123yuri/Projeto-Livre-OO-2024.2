@@ -122,7 +122,7 @@ class Grade():
             dias.sort(key=lambda dia: ordem_dias.index(dia))
             dias_formatados = f"{dias[0]} e {dias[1]}"
         else:
-            # Ordenar os dias conforme a ordem definida
+            #
             dias.sort(key=lambda dia: ordem_dias.index(dia))
             dias_formatados = ", ".join(dias[:-1]) + f" e {dias[-1]}"
         horarios_formatados = ', '.join(hora)

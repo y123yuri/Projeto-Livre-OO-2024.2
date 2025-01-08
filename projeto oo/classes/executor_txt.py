@@ -1,8 +1,7 @@
 from shapes import *
 import os
 
-import os
-from shapes import *
+
 
 class Salvar_materias():
     def __init__(self):

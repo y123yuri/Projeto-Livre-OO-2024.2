@@ -20,9 +20,30 @@
                     "M2"
                 ]
             }
+        ],
+        [
+            [
+                "CÁLCULO 1",
+                "MAT0025"
+            ],
+            {
+                "Segunda": [
+                    "N1",
+                    "N2"
+                ],
+                "Quarta": [
+                    "N1",
+                    "N2"
+                ],
+                "Sexta": [
+                    "N1",
+                    "N2"
+                ]
+            }
         ]
     ],
     "nomes_materias": [
-        "ALGORITMOS E PROGRAMAÇÃO DE COMPUTADORES"
+        "ALGORITMOS E PROGRAMAÇÃO DE COMPUTADORES",
+        "CÁLCULO 1"
     ]
 }

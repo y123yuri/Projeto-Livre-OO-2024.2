@@ -5,6 +5,7 @@ from metodo_turma import *
 from salvar_grade import *
 import os
 import json
+from shapes import ValidadorMaterias, ValidadorTurmas
 
 
 
@@ -12,6 +13,7 @@ import json
 procedural_materias = Salvar_materias()
 procedural_materias.tratar_materia()
 buscar = Buscar_materia(procedural_materias)
+validador_materias = ValidadorMaterias()
 
 buscar_metodos_materia = Metodo_busca_materia()
 buscar_metodos = Metodo_busca()
@@ -26,6 +28,11 @@ clear = Limpar()
 # buscar = Buscar_turmas(procedural_turmas)
 travador = False
 
+if validador_materias.validar(procedural_materias.get_materias()):
+    # Tudo validado corretamente
+    pass
+else:
+    raise ValueError("Erro ao validar as matérias transcritas.")
 
 class Main():
     

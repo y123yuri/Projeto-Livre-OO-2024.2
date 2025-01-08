@@ -1,55 +1,51 @@
-==========================================
-🎓 UnBGradeBuilder  🎓
+# 🎓 UnBGradeBuilder 🎓
 
-Uma ferramenta de terminal para organizar sua grade horária na UnB!
+Organize sua grade horária na UnB com eficiência! Um sistema de terminal simples e poderoso para estudantes.
 
-🔹 Descrição
+---
 
-O UnBGradeBuilder é uma ferramenta criada para ajudar alunos da Universidade de Brasília (UnB) a montar grades horárias de forma simples e eficiente!
+## 🔹 **Descrição**
 
-Funcionalidades principais:
+O UnBGradeBuilder é uma ferramenta criada para ajudar alunos da Universidade de Brasília (UnB) a montar grades horárias de forma simples e eficiente.
 
-🕋 Visualização de Turmas: Veja as disciplinas e turmas disponíveis, com detalhes sobre professores e horários.
+### **Funcionalidades principais:**
+- 🕋 **Visualização de Turmas**: Veja as disciplinas e turmas disponíveis, com detalhes sobre professores e horários.
+- ⚠️ **Detecção de Conflitos**: Identifique automaticamente conflitos de horário ao montar sua grade.
+- 🔧 **Gerenciamento de Grade**: Adicione e remova disciplinas facilmente para personalizar sua grade.
 
-⚠️ Detecção de Conflitos: Identifique automaticamente conflitos de horário ao montar sua grade.
+---
 
-🔧 Gerenciamento de Grade: Adicione e remova disciplinas facilmente para personalizar sua grade.
-
-🎨 Objetivo
-
-Simplificar o processo de montagem de grades acadêmicas na UnB, proporcionando:
-
-Exploração rápida das turmas.
-
-Detecção automática de conflitos de horário.
-
-Personalização prática da grade acadêmica.
+## 🎨 **Objetivo**
+- Explorar turmas e horários disponíveis de forma prática.
+- Detectar conflitos automaticamente ao montar sua grade.
+- Permitir personalização simples e eficiente da grade acadêmica.
 
 Com o UnBGradeBuilder, sua organização acadêmica fica muito mais fácil!
 
-🔧 Tecnologias Utilizadas
+---
 
-Linguagem: Python 3.x
+## 🔧 **Tecnologias Utilizadas**
+- **Linguagem**: Python 3.x
+- **Bibliotecas**: Apenas a biblioteca padrão do Python (sem dependências externas).
 
-Bibliotecas: Apenas a biblioteca padrão do Python (sem dependências externas).
+---
 
-🔧 Como Rodar
+## 🔧 **Como Rodar**
 
-Certifique-se de ter o Python 3.x ou superior instalado no seu sistema.
+1. Certifique-se de ter o Python 3.x ou superior instalado no seu sistema.
+2. Baixe ou clone este repositório.
+3. Navegue até o diretório onde o arquivo `main.py` está localizado.
+4. Execute o programa:
 
-Baixe ou clone este repositório.
+   - Pelo terminal:
+     ```bash
+     python main.py
+     ```
+   - Ou abra o arquivo `main.py` na sua IDE ou editor de código preferido e clique em Run.
 
-Navegue até o diretório onde o arquivo main.py está localizado.
+---
 
-Execute o programa:
-
-Pelo terminal:
-
-python main.py
-
-Ou abra o arquivo main.py na sua IDE ou editor de código preferido e clique em Run.
-
-🏛️ Estrutura do Projeto
+## 🏛️ **Estrutura do Projeto**
 
 projeto oo/
 ├── arquivos/
@@ -65,39 +61,33 @@ projeto oo/
 ├── webscraper/             # Pasta de raspagem de dados (web scraping)
 ├── main.py                 # Arquivo principal
 
-🔎 Detalhes dos Arquivos
 
-main.py:
+---
 
-Gerencia a interação com o usuário e o fluxo do programa.
+## 🔎 **Detalhes dos Arquivos**
+- **main.py**:
+  Gerencia a interação com o usuário, valida conflitos de horário e salva informações.
+- **buscar.py**:
+  Classes para realizar buscas de disciplinas e turmas por nome ou código.
+- **executor_txt.py**:
+  Manipula arquivos de texto (`materias.txt` e `turmas.txt`).
+- **metodo_turma.py**:
+  Gerencia buscas avançadas e edições de turmas e grades.
+- **salvar_grade.py**:
+  Exibe a grade acadêmica e detecta conflitos de horário.
+- **shapes.py**:
+  Define classes básicas como `Materia`, `Turma` e `Usuario`.
 
-Valida conflitos de horário e salva informações.
+---
 
-buscar.py:
+## 💾 **Persistência de Dados**
+- O programa salva automaticamente sua grade e matérias em um arquivo JSON (`database_json_usuarios.txt`), permitindo que você continue de onde parou.
 
-Classes para buscar informações de disciplinas e turmas.
+---
 
-executor_txt.py:
+## 🚀 **Contribuição**
+- Sinta-se à vontade para sugerir melhorias ou relatar problemas. Agradecemos seu feedback!
 
-Manipula os arquivos de texto (materias.txt e turmas.txt).
-
-metodo_turma.py:
-
-Gerencia buscas avançadas e editações de turmas e grades.
-
-salvar_grade.py:
-
-Exibe a grade acadêmica e detecta conflitos de horário.
-
-shapes.py:
-
-Define classes básicas como Materia, Turma e Usuario.
-
-webscraper:
-
-Scripts para raspar dados diretamente do SIGAA e salvar em arquivos texto.
+---
 
 Obrigado pela atenção!
-
-
-

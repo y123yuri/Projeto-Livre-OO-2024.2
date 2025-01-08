@@ -1,0 +1,28 @@
+{
+    "usuario_banco": "Yuri",
+    "turmas_e_horarios": [
+        [
+            [
+                "ALGORITMOS E PROGRAMAÇÃO DE COMPUTADORES",
+                "CIC0004"
+            ],
+            {
+                "Segunda": [
+                    "M1",
+                    "M2"
+                ],
+                "Terça": [
+                    "M1",
+                    "M2"
+                ],
+                "Quinta": [
+                    "M1",
+                    "M2"
+                ]
+            }
+        ]
+    ],
+    "nomes_materias": [
+        "ALGORITMOS E PROGRAMAÇÃO DE COMPUTADORES"
+    ]
+}
